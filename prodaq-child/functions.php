@@ -14,3 +14,13 @@ function child_theme_enqueue_styles() {
 	);
 }
 add_action( 'wp_enqueue_scripts', 'child_theme_enqueue_styles' );
+
+
+// Template Overides
+// Leave commented out unless you plan on changing fields for each post type. This is a work in progress for the child theme mods. It knows where to find WPAlchemy from the parent so we're just redefining the setup with our revised template location in the child.
+// Campaigns
+// include( 'library/_prodaq/campaigns.php');
+// Participants
+// include( 'library/_prodaq/participants.php');
+// Personas
+// include( 'library/_prodaq/personas.php');

@@ -84,14 +84,19 @@ add_action('manage_persona_posts_custom_column', 'ST4_columns_content_personas',
 /* Metaboxes
 ---------------------------------------------------------------*/
 // Declare new metabox and template for campaign
-$personaData = new WPAlchemy_MetaBox(array
-(
-	'id' => '_persona_data',
-	'mode' => WPALCHEMY_MODE_EXTRACT,
-	'prefix' => '_persona_',
-	'title' => 'Persona Details',
-	'types' => array('persona'),
-	'context' => 'normal', // same as above, defaults to "normal"
-	'priority' => 'high', // same as above, defaults to "high"
-	'template' => get_template_directory() . '/library/_prodaq/persona/persona-base.php'
-));
+if ( ! function_exists ( 'addPersonaMetabox' ) ) {
+	function addPersonaMetabox() {
+		$personaData = new WPAlchemy_MetaBox(array
+		(
+			'id' => '_persona_data',
+			'mode' => WPALCHEMY_MODE_EXTRACT,
+			'prefix' => '_persona_',
+			'title' => 'Persona Details',
+			'types' => array('persona'),
+			'context' => 'normal', // same as above, defaults to "normal"
+			'priority' => 'high', // same as above, defaults to "high"
+			'template' => get_template_directory() . '/library/_prodaq/persona/persona-base.php'
+		));
+	}
+}
+addPersonaMetabox();

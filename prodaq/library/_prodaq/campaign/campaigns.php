@@ -59,14 +59,19 @@ add_action( 'init', 'my_taxonomies_campaign', 0 );
 /* Metaboxes
 ---------------------------------------------------------------*/
 // Declare new metabox and template for campaign
-$campaignData = new WPAlchemy_MetaBox(array
-(
-	'id' => '_campaign_data',
-	'mode' => WPALCHEMY_MODE_EXTRACT,
-	'prefix' => '_campaign_',
-	'title' => 'Campaign Information',
-	'types' => array('campaign'),
-	'context' => 'normal', // same as above, defaults to "normal"
-	'priority' => 'high', // same as above, defaults to "high"
-	'template' => get_template_directory() . '/library/_prodaq/campaign/campaign-base.php'
-));
+if ( ! function_exists ( 'addCampaignMetabox' ) ) {
+	function addCampaignMetabox() {
+		$campaignData = new WPAlchemy_MetaBox(array
+		(
+			'id' => '_campaign_data',
+			'mode' => WPALCHEMY_MODE_EXTRACT,
+			'prefix' => '_campaign_',
+			'title' => 'Campaign Information',
+			'types' => array('campaign'),
+			'context' => 'normal', // same as above, defaults to "normal"
+			'priority' => 'high', // same as above, defaults to "high"
+			'template' => get_template_directory() . '/library/_prodaq/campaign/campaign-base.php'
+		));
+	}
+}
+addCampaignMetabox();

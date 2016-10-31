@@ -45,7 +45,7 @@ function ST4_columns_head_participants($columns) {
 
 	$customOrder = array('cb','featured_image', 'title', 'company', 'date');
 	foreach ($customOrder as $colname)
-	  $new[$colname] = $columns[$colname];
+		$new[$colname] = $columns[$colname];
 	return $new;
 }
 function ST4_columns_content_participants($column_name, $post_ID) {
@@ -72,14 +72,19 @@ function ST4_columns_content_participants($column_name, $post_ID) {
 add_filter('manage_participant_posts_columns', 'ST4_columns_head_participants', 10);
 add_action('manage_participant_posts_custom_column', 'ST4_columns_content_participants', 10, 2);
 // Declare new metabox and template for participant
-$participantData = new WPAlchemy_MetaBox(array
-(
-	'id' => '_participant_data',
-	'mode' => WPALCHEMY_MODE_EXTRACT,
-	'prefix' => '_participant_',
-	'title' => 'Participant Information',
-	'types' => array('participant'),
-	'context' => 'normal', // same as above, defaults to "normal"
-	'priority' => 'high', // same as above, defaults to "high"
-	'template' => get_template_directory() . '/library/_prodaq/participant/participant-base.php'
-));
+if ( ! function_exists ( 'addParticipantMetabox' ) ) {
+	function addParticipantMetabox() {
+		$participantData = new WPAlchemy_MetaBox(array
+		(
+			'id' => '_participant_data',
+			'mode' => WPALCHEMY_MODE_EXTRACT,
+			'prefix' => '_participant_',
+			'title' => 'Participant Information',
+			'types' => array('participant'),
+			'context' => 'normal', // same as above, defaults to "normal"
+			'priority' => 'high', // same as above, defaults to "high"
+			'template' => get_template_directory() . '/library/_prodaq/participant/participant-base.php'
+		));
+	}
+}
+addParticipantMetabox();
